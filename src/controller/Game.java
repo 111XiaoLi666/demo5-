@@ -108,9 +108,12 @@ public class Game {
     //存档用户进度
     public void saveProgress(String username)
     {
-        List<String> names = (List<String>) piecesMoved.stream().map(Piece::getId);   // 或 getName(), 取决于你怎么唯一标识.collect(Collectors.toList());
+       List<String> names = new ArrayList<>();
+        for (Piece p : piecesMoved) {
+            names.add(p.getId());
+        }
         GameProgress progress = new GameProgress(names, new ArrayList<>(directionsMoved));
-
+    
         //复制集合元素
         File dir=new File("saves");
         System.out.println("Directory exists: " + dir.exists()); // 检查目录是否存在
